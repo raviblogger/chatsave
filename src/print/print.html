@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Preparing PDF…</title>
+<style>html,body{margin:0;height:100%}iframe{border:0;width:100%;height:100%}
+.bar{position:fixed;top:0;left:0;right:0;display:flex;gap:12px;align-items:center;padding:10px 16px;background:#1A1A1E;color:#fff;font:13px system-ui,sans-serif;z-index:2}
+.bar button{height:32px;padding:0 14px;border-radius:8px;border:0;background:#4F46E5;color:#fff;font:600 13px system-ui,sans-serif;cursor:pointer}
+.bar span{opacity:.75}
+iframe{padding-top:52px;box-sizing:border-box}
+@media print{.bar{display:none}iframe{padding-top:0}}</style>
+</head>
+<body>
+<div class="bar"><button id="print" type="button">Print / Save as PDF</button><span>In the print dialog choose "Save as PDF" as the destination.</span></div>
+<iframe id="f" title="Export preview"></iframe>
+<script src="print.js"></script>
+</body>
+</html>

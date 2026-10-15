@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>ChatSave</title>
+<link rel="stylesheet" href="popup.css">
+</head>
+<body>
+<header>
+  <span class="mark" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></span>
+  <h1>ChatSave</h1>
+  <span id="state" class="state">Checking…</span>
+</header>
+
+<section id="export">
+  <h2>Export this chat</h2>
+  <div class="grid">
+    <button type="button" data-id="md">Markdown</button>
+    <button type="button" data-id="docx">Word</button>
+    <button type="button" data-id="pdf">PDF</button>
+    <button type="button" data-id="html">Web page</button>
+    <button type="button" data-id="txt">Text</button>
+    <button type="button" data-id="json">JSON</button>
+  </div>
+  <label class="row"><input type="checkbox" id="includePrompts"> Include my prompts</label>
+  <button type="button" id="diag" class="small" hidden>Copy page diagnostic</button>
+</section>
+
+<section id="supported">
+  <h2>Works on</h2>
+  <div id="sitesGrid" class="sites-grid"></div>
+</section>
+
+<section id="notion">
+  <h2>Notion</h2>
+  <div id="notionOff">
+    <p class="muted small">Create an internal integration at notion.so/my-integrations, share a page with it, then paste the token.</p>
+    <div class="row"><input type="password" id="notionToken" placeholder="ntn_… or secret_…" spellcheck="false"><button type="button" id="notionConnect" class="primary">Connect</button></div>
+  </div>
+  <div id="notionOn" hidden>
+    <div class="row between"><span id="notionWho" class="muted"></span><button type="button" id="notionDisconnect">Disconnect</button></div>
+    <label class="row">Save under <select id="notionParent"></select></label>
+  </div>
+</section>
+
+<section id="fylo">
+  <h2>Publish to the web</h2>
+  <p class="muted" id="fyloHint">Turn a chat, or the code in a reply, into a live page on Fylo. Free account, one click.</p>
+  <div class="row between">
+    <span id="fyloWho" class="muted"></span>
+    <button type="button" id="fyloBtn" class="primary">Connect Fylo</button>
+  </div>
+  <ul id="sites" class="sites"></ul>
+</section>
+
+<section id="settings">
+  <h2>Settings</h2>
+  <label class="row">File name <input type="text" id="filenamePattern" spellcheck="false"></label>
+  <p class="muted small">Use {title} {date} {time} {source}.</p>
+  <label class="row">Page theme
+    <select id="theme"><option value="light">Light</option><option value="dark">Dark</option><option value="auto">Match system</option></select>
+  </label>
+  <label class="row">Your name on pages <input type="text" id="author" placeholder="optional"></label>
+</section>
+
+<footer>
+  <span>All exports happen in your browser. Nothing is uploaded unless you publish.</span>
+</footer>
+<script src="popup.js"></script>
+</body>
+</html>
