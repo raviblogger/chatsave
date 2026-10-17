@@ -24,6 +24,30 @@
       row.insertBefore(btn, sib);
     }
   }
+  /* Artifact / canvas panels (Claude artifacts, ChatGPT canvas) keep their code
+     outside the reply, behind a header "Copy" button. Like Tiiny Host: add a
+     button beside it, click Copy, read the clipboard, publish if it's HTML. */
+  function injectPanelButtons() {
+    for (const copyBtn of document.querySelectorAll('button')) {
+      if (copyBtn.dataset.cxPanel) continue;
+      const isCopy = copyBtn.textContent.trim() === 'Copy' || copyBtn.getAttribute('aria-label') === 'Copy';
+      if (!isCopy || copyBtn.closest('pre, .cx-btn') || copyBtn.closest(SEL.assistantMessage.join(','))) continue;
+      copyBtn.dataset.cxPanel = '1';
+      const btn = document.createElement('button');
+      btn.type = 'button'; btn.className = 'cx-btn cx-pub'; btn.title = 'Publish this code as a live site on Fylo';
+      btn.innerHTML = `${CX.ui.ICON.rocket}<span>Publish</span>`;
+      btn.addEventListener('click', async (e) => {
+        e.stopPropagation();
+        copyBtn.click();
+        await new Promise((r) => setTimeout(r, 400));
+        let code = '';
+        try { code = await navigator.clipboard.readText(); } catch (_) {}
+        if (!/<html|<!doctype|<body|<head/i.test(code)) return CX.ui.toast('Open an HTML artifact first — this one isn\'t a web page.', 'error');
+        publish({ url: location.href, title: document.title }, { kind: 'code', files: [{ path: 'index.html', content: code }] });
+      });
+      copyBtn.after(btn);
+    }
+  }
   let chatBtn = null;
   function injectChatButton() {
     const hasChat = CX.parser.messageElements().length > 0;
@@ -37,10 +61,10 @@
   const observer = new MutationObserver(() => {
     if (scheduled) return;
     scheduled = true;
-    requestAnimationFrame(() => { scheduled = false; injectMessageButtons(); injectChatButton(); });
+    requestAnimationFrame(() => { scheduled = false; injectMessageButtons(); injectPanelButtons(); injectChatButton(); });
   });
   observer.observe(document.body, { childList: true, subtree: true });
-  injectMessageButtons(); injectChatButton();
+  injectMessageButtons(); injectPanelButtons(); injectChatButton();
 
   /* ---------- menu + actions ---------- */
   function convFor(btn, scope) {

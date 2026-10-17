@@ -6,6 +6,11 @@
 }
 .cx-btn:hover,.cx-btn:focus-visible{opacity:1;background:rgba(127,127,127,.14);outline:none}
 .cx-btn:focus-visible{box-shadow:0 0 0 2px #4F46E5}
+.cx-btn.cx-pub{
+  width:auto;height:28px;padding:0 10px 0 8px;gap:6px;opacity:1;margin:0 6px;
+  background:#4F46E5;color:#fff;border-radius:8px;font:500 12px/1 system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+.cx-btn.cx-pub:hover{background:#4338CA}
 .cx-btn.cx-chat{
   width:auto;height:36px;padding:0 14px 0 10px;gap:8px;opacity:1;
   position:fixed;right:20px;bottom:96px;z-index:2147483000;
