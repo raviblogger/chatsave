@@ -48,23 +48,14 @@
       copyBtn.after(btn);
     }
   }
-  let chatBtn = null;
-  function injectChatButton() {
-    const hasChat = CX.parser.messageElements().length > 0;
-    if (hasChat && !chatBtn) {
-      chatBtn = CX.ui.chatButton();
-      chatBtn.addEventListener('click', (e) => { e.stopPropagation(); openFor(chatBtn, 'chat'); });
-      document.body.appendChild(chatBtn);
-    } else if (!hasChat && chatBtn) { chatBtn.remove(); chatBtn = null; }
-  }
   let scheduled = false;
   const observer = new MutationObserver(() => {
     if (scheduled) return;
     scheduled = true;
-    requestAnimationFrame(() => { scheduled = false; injectMessageButtons(); injectPanelButtons(); injectChatButton(); });
+    requestAnimationFrame(() => { scheduled = false; injectMessageButtons(); injectPanelButtons(); });
   });
   observer.observe(document.body, { childList: true, subtree: true });
-  injectMessageButtons(); injectPanelButtons(); injectChatButton();
+  injectMessageButtons(); injectPanelButtons();
 
   /* ---------- menu + actions ---------- */
   function convFor(btn, scope) {

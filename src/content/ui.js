@@ -44,13 +44,6 @@
       b.setAttribute('aria-label', label); b.title = label; b.innerHTML = ICON.export;
       return b;
     },
-    /* Pill button for the whole chat, anchored near the composer. */
-    chatButton() {
-      const b = document.createElement('button');
-      b.type = 'button'; b.className = 'cx-btn cx-chat'; b.dataset.cxScope = 'chat';
-      b.innerHTML = `${ICON.export}<span>Export chat</span>`;
-      return b;
-    },
     menu(anchor, ctx, onPick) {
       closeMenu();
       const m = document.createElement('div');

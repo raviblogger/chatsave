@@ -11,17 +11,6 @@
   background:#4F46E5;color:#fff;border-radius:8px;font:500 12px/1 system-ui,-apple-system,"Segoe UI",sans-serif;
 }
 .cx-btn.cx-pub:hover{background:#4338CA}
-.cx-btn.cx-chat{
-  width:auto;height:36px;padding:0 14px 0 10px;gap:8px;opacity:1;
-  position:fixed;right:20px;bottom:96px;z-index:2147483000;
-  background:#fff;color:#1A1A1E;border:1px solid #E3E3E8;border-radius:999px;
-  font:500 13px/1 system-ui,-apple-system,"Segoe UI",sans-serif;box-shadow:0 4px 16px rgba(0,0,0,.12);
-}
-.cx-btn.cx-chat:hover{background:#F4F4F6}
-@media (prefers-color-scheme:dark){
-  .cx-btn.cx-chat{background:#26262A;color:#ECECEE;border-color:#3A3A40}
-  .cx-btn.cx-chat:hover{background:#2F2F34}
-}
 .cx-menu{
   position:absolute;z-index:2147483001;width:280px;padding:6px;
   background:#fff;color:#1A1A1E;border:1px solid #E3E3E8;border-radius:12px;
