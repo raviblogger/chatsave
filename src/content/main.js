@@ -38,12 +38,16 @@
       btn.innerHTML = `${CX.ui.ICON.rocket}<span>Publish</span>`;
       btn.addEventListener('click', async (e) => {
         e.stopPropagation();
-        copyBtn.click();
-        await new Promise((r) => setTimeout(r, 400));
-        let code = '';
-        try { code = await navigator.clipboard.readText(); } catch (_) {}
-        if (!/<html|<!doctype|<body|<head/i.test(code)) return CX.ui.toast('Open an HTML artifact first — this one isn\'t a web page.', 'error');
-        publish({ url: location.href, title: document.title }, { kind: 'code', files: [{ path: 'index.html', content: code }] });
+        if (btn.disabled) return;
+        btn.disabled = true; btn.lastChild.textContent = 'Publishing…';
+        try {
+          copyBtn.click(); // the site's own Copy; its "Copied" badge is expected
+          await new Promise((r) => setTimeout(r, 400));
+          let code = '';
+          try { code = await navigator.clipboard.readText(); } catch (_) {}
+          if (!/<html|<!doctype|<body|<head/i.test(code)) return CX.ui.toast('Open an HTML artifact first — this one isn\'t a web page.', 'error');
+          await publish({ url: location.href, title: document.title }, { kind: 'code', files: [{ path: 'index.html', content: code }] });
+        } finally { btn.disabled = false; btn.lastChild.textContent = 'Publish'; }
       });
       copyBtn.after(btn);
     }

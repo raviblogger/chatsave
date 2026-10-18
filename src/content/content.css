@@ -11,6 +11,7 @@
   background:#4F46E5;color:#fff;border-radius:8px;font:500 12px/1 system-ui,-apple-system,"Segoe UI",sans-serif;
 }
 .cx-btn.cx-pub:hover{background:#4338CA}
+.cx-btn.cx-pub:disabled{opacity:.7;cursor:progress}
 .cx-menu{
   position:absolute;z-index:2147483001;width:280px;padding:6px;
   background:#fff;color:#1A1A1E;border:1px solid #E3E3E8;border-radius:12px;

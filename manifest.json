@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "ChatSave: AI Chat Exporter — ChatGPT, Claude, Gemini to PDF, Word, Markdown",
   "short_name": "ChatSave",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Export ChatGPT, Claude, Gemini, Grok, DeepSeek & more to PDF, Word, Markdown, Notion. Free, no account, nothing leaves your browser.",
   "icons": {
     "16": "icons/icon16.png",
